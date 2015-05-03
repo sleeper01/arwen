@@ -84,16 +84,16 @@ public abstract class AbstractEntity implements IEntity{
 	/* (non-Javadoc)
 	 * @see com.dm.common.domain.model.IEntity#initCreateInfo(java.util.Map)
 	 */
-	public void initCreateInfo(Map<Object, Object> params) {
-		this.setCreatorId(ParamUtils.getString(params, SessionConstants.LOGIN_USER_ID, ""));
+	protected void initCreateInfo(Map<Object, Object> params) {
+		this.setCreatorId(ParamUtils.getString(params, SessionConstants.LOGIN_ACCOUNT_ID, ""));
 		this.setCreateDate(new Date());
 	}
 
 	/* (non-Javadoc)
 	 * @see com.dm.common.domain.model.IEntity#initUpdateInfo(java.util.Map)
 	 */
-	public void initUpdateInfo(Map<Object, Object> params) {
-		this.setUpdaterId(ParamUtils.getString(params, SessionConstants.LOGIN_USER_ID, ""));
+	protected void initUpdateInfo(Map<Object, Object> params) {
+		this.setUpdaterId(ParamUtils.getString(params, SessionConstants.LOGIN_ACCOUNT_ID, ""));
 		this.setUpdateDate(new Date());
 	}
 	
@@ -101,7 +101,12 @@ public abstract class AbstractEntity implements IEntity{
 	 * @see com.dm.common.domain.model.IEntity#caseCade(java.util.Map)
 	 */
 	public void caseCade(Map<Object, Object> params) {
-		this.setId(ParamUtils.getString(params, "id", null));
+//		this.setId(ParamUtils.getString(params, "id", null));
+		if(null == this.getId()){
+			this.initCreateInfo(params);
+		}else{
+			this.initUpdateInfo(params);
+		}
 	}
 
 	/**

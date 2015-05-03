@@ -55,7 +55,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>springServlet</servlet-name>
-		<url-pattern>*.dm</url-pattern>
+		<url-pattern>*.qh</url-pattern>
 	</servlet-mapping>
 
 	<welcome-file-list>

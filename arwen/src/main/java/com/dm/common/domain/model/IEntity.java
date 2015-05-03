@@ -24,12 +24,12 @@ public interface IEntity {
 	/**
 	 * @param params
 	 */
-	public void initCreateInfo(Map<Object,Object> params);
+//	void initCreateInfo(Map<Object,Object> params);
 	
 	/**
 	 * @param params
 	 */
-	public void initUpdateInfo(Map<Object,Object> params);
+//	void initUpdateInfo(Map<Object,Object> params);
 	
 	/**
 	 * @param params

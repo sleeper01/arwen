@@ -33,7 +33,7 @@ public class Account extends StatusEntity {
 	@Column
 	private String pwd;
 
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "accounts", cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST,targetEntity=Role.class,mappedBy="accounts")
 	private Set<Role> roles = new HashSet<>();
 
 	/**
@@ -78,7 +78,9 @@ public class Account extends StatusEntity {
 	public void caseCade(Map<Object, Object> params) {
 		super.caseCade(params);
 		this.setName(ParamUtils.getString(params, "name", ""));
-		this.setPwd(PwdUtils.parseStrToMd5U32(ParamUtils.getString(params, "pwd", "")));
+		if(!"".equals(ParamUtils.getString(params, "id", ""))){
+			this.setPwd(PwdUtils.parseStrToMd5U32(ParamUtils.getString(params, "pwd", "000000")));
+		}
 	}
 	
 	/**
@@ -99,6 +101,28 @@ public class Account extends StatusEntity {
 			this.roles.add(role);
 			role.getAccounts().add(this);
 		}
+	}
+	
+	/**
+	 * @param role
+	 */
+	public void removeRole(Role role){
+		if(role != null){
+			if(this.roles.contains(role)){
+				this.roles.remove(role);
+				role.removeAccount(this);
+			}
+		}
+	}
+	
+	/**
+	 * 
+	 */
+	public void removeAllRoles(){
+		for(Role role : this.roles){
+			role.getAccounts().remove(this);
+		}
+		this.roles.clear();
 	}
 
 	/**

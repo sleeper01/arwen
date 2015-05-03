@@ -1,2 +1,8 @@
 eclipse.preferences.version=1
+encoding//src/main/webapp/bizs/account/view/account-form.html=UTF-8
+encoding//src/main/webapp/bizs/account/view/account-list.html=UTF-8
+encoding//src/main/webapp/bizs/app/type/view/app-form.html=UTF-8
+encoding//src/main/webapp/bizs/app/type/view/app-type-form.html=UTF-8
+encoding//src/main/webapp/bizs/app/type/view/app-type-list.html=UTF-8
+encoding//src/main/webapp/bizs/role/view/role-list.html=UTF-8
 encoding/<project>=UTF-8

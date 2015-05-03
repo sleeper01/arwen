@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 
 import com.dm.common.domain.model.IEntity;
+import com.dm.common.exception.MyRuntimeException;
 
 /**
  * @author Administrator
@@ -27,6 +28,13 @@ public class AbstractDao<T extends IEntity> {
 	@Autowired
 	private SessionFactory sessionFactory;
 	
+	protected Class<T> entityclass;
+	
+	public AbstractDao() {
+		super();
+		this.entityclass = getEntityClass();
+	}
+
 	/**
 	 * @return
 	 */
@@ -40,7 +48,39 @@ public class AbstractDao<T extends IEntity> {
 	 */
 	@SuppressWarnings("unchecked")
 	public T get(String id){
-		return (T) sessionFactory.getCurrentSession().get(this.getClass1(), id);
+		return (T) sessionFactory.getCurrentSession().get(entityclass, id);
+	}
+	
+	/**
+	 * @param hql
+	 * @param args
+	 * @return
+	 */
+	public T findEntity(String hql,Object ...args){
+		List<T> list = this.find(hql, args);
+		if(list != null){
+			if(list.size() > 1){
+				throw new MyRuntimeException("查询结果不唯一.");
+			}
+			return list.get(0);
+		}
+		return null;
+	}
+	
+	/**
+	 * @param hql
+	 * @param args
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public List<T> find(String hql,Object ...args){
+		Query query = this.sessionFactory.getCurrentSession().createQuery(hql);
+		if(args != null && args.length > 0){
+			for(int i=0;i<args.length;i++){
+				query.setParameter(i, args[i]);
+			}
+		}
+		return query.list();
 	}
 	
 	/**
@@ -49,7 +89,7 @@ public class AbstractDao<T extends IEntity> {
 	 */
 	@SuppressWarnings("unchecked")
 	public T load(String id){
-		return (T)sessionFactory.getCurrentSession().load(getClass1(), id);
+		return (T)sessionFactory.getCurrentSession().load(entityclass, id);
 	}
 	
 	/**
@@ -95,9 +135,19 @@ public class AbstractDao<T extends IEntity> {
 		return query.list();
 	}
 	
-	private Class<T> getClass1(){
-		Type type = getClass().getGenericSuperclass();  
-        Type[] trueType = ((ParameterizedType) type).getActualTypeArguments();
-		return (Class<T>) trueType[0];
+	@SuppressWarnings("unchecked")
+	public List<T> findAll() {
+		return sessionFactory.getCurrentSession().createCriteria(entityclass).list();
+	}
+	
+	@SuppressWarnings("unchecked")
+	protected Class<T> getEntityClass() {
+		Type type = getClass().getGenericSuperclass();
+		Class<T> result = null;
+		if (type instanceof ParameterizedType) {
+			ParameterizedType parameterizedType = (ParameterizedType) type;
+			result = (Class<T>) parameterizedType.getActualTypeArguments()[0];
+		}
+		return result;
 	}
 }

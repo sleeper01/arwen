@@ -6,6 +6,8 @@ package com.dm.common.domain.model;
 import java.util.Map;
 
 import javax.persistence.Column;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.MappedSuperclass;
 
 import com.dm.common.utils.ParamUtils;
@@ -18,6 +20,7 @@ import com.dm.common.utils.ParamUtils;
 public class StatusEntity extends AbstractEntity {
 
 	@Column
+	@Enumerated(EnumType.STRING)
 	private Status status = Status.ENABLE;
 	
 	public static enum Status{
@@ -47,8 +50,22 @@ public class StatusEntity extends AbstractEntity {
 	 */
 	@Override
 	public void caseCade(Map<Object, Object> params) {
+		this.setStatus(ParamUtils.getEnum(params, "status", Status.values()));
 		super.caseCade(params);
-		this.setStatus(Status.valueOf(ParamUtils.getString(params, "status", "ENABLE")));
+	}
+	
+	/**
+	 * 
+	 */
+	public void disable(){
+		this.setStatus(Status.DISABLE);
+	}
+	
+	/**
+	 * 
+	 */
+	public void enable(){
+		this.setStatus(Status.ENABLE);
 	}
 
 	/**

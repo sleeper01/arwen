@@ -3,12 +3,18 @@
  */
 package com.dm.bizs.sm.domain.model;
 
+import java.util.Map;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.dm.common.domain.model.Constant;
 import com.dm.common.domain.model.StatusEntity;
+import com.dm.common.utils.ParamUtils;
 
 /**
  * @author Administrator
@@ -35,9 +41,16 @@ public class App extends StatusEntity {
 
 	@Column
 	private Integer sort;
+	
+	@Column
+	private String iconClass;
 
-	@ManyToOne(targetEntity = AppType.class)
+	@ManyToOne(targetEntity = AppType.class,cascade=CascadeType.PERSIST)
 	private AppType appType;
+	
+	@Column
+	@Enumerated
+	private Constant showInMenus = Constant.YES;
 
 	/**
 	 * @return the name
@@ -88,6 +101,70 @@ public class App extends StatusEntity {
 		return appType;
 	}
 
+	/**
+	 * @return the showInMenus
+	 */
+	public Constant getShowInMenus() {
+		return showInMenus;
+	}
+
+	/**
+	 * @return the iconClass
+	 */
+	public String getIconClass() {
+		return iconClass;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.dm.common.domain.model.StatusEntity#toMap()
+	 */
+	@Override
+	public Map<Object, Object> toMap() {
+		Map<Object, Object> res = super.toMap();
+		res.put("name", this.name);
+		res.put("stateName", this.stateName);
+		res.put("templateUrl", this.templateUrl);
+		res.put("ctlName", this.ctlName);
+		res.put("ctlUrl", this.ctlUrl);
+		res.put("iconClass", this.iconClass);
+		res.put("sort", this.sort);
+		res.put("showInMenus", this.showInMenus);
+		return res;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.dm.common.domain.model.StatusEntity#caseCade(java.util.Map)
+	 */
+	@Override
+	public void caseCade(Map<Object, Object> params) {
+		super.caseCade(params);
+		this.setName(ParamUtils.getString(params, "name", name));
+		this.setStateName(ParamUtils.getString(params, "stateName", ""));
+		this.setTemplateUrl(ParamUtils.getString(params, "templateUrl", ""));
+		this.setCtlName(ParamUtils.getString(params, "ctlName", ""));
+		this.setCtlUrl(ParamUtils.getString(params, "ctlUrl", ""));
+		this.setSort(ParamUtils.getInteger(params, "sort", 0));
+		this.setShowInMenus(ParamUtils.getEnum(params, "showInMenus", Constant.values()));
+		this.setIconClass(ParamUtils.getString(params, "iconClass", ""));
+	}
+	
+	/**
+	 * @return
+	 */
+	public App pureEntity(){
+		App app = new App();
+		app.setId(this.getId());
+		app.setName(this.name);
+		app.setStateName(this.stateName);
+		app.setTemplateUrl(this.templateUrl);
+		app.setCtlName(this.ctlName);
+		app.setCtlUrl(this.ctlUrl);
+		app.setSort(this.sort);
+		app.setShowInMenus(this.showInMenus);
+		app.setIconClass(this.iconClass);
+		return app;
+	}
+	
 	/**
 	 * @param name
 	 *            the name to set
@@ -142,5 +219,19 @@ public class App extends StatusEntity {
 	 */
 	protected void setAppType(AppType appType) {
 		this.appType = appType;
+	}
+
+	/**
+	 * @param showInMenus the showInMenus to set
+	 */
+	protected void setShowInMenus(Constant showInMenus) {
+		this.showInMenus = showInMenus;
+	}
+
+	/**
+	 * @param iconClass the iconClass to set
+	 */
+	protected void setIconClass(String iconClass) {
+		this.iconClass = iconClass;
 	}
 }

@@ -9,9 +9,9 @@ package com.dm.common.constants;
  */
 public class SessionConstants {
 
-	public static String LOGIN_USER = "loginUser";
+	public static String LOGIN_ACCOUNT = "loginUser";
 	
-	public static String LOGIN_USER_ID = "loginUserId";
+	public static String LOGIN_ACCOUNT_ID = "loginUserId";
 	
-	public static String LOGIN_USER_NAME = "loginUserName";
+	public static String LOGIN_ACCOUNT_NAME = "loginUserName";
 }
