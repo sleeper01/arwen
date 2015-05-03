@@ -58,7 +58,7 @@ define(['../service/AppTypeService.js',
 					sort : '',
 					iconClass : '',
 					status : 'ENABLE',
-					showInMenus : 'YES'
+					showMenus : 'YES'
 				};
 				$('#app-form').modal('show');
 			};

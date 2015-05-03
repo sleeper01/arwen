@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -49,8 +50,8 @@ public class App extends StatusEntity {
 	private AppType appType;
 	
 	@Column
-	@Enumerated
-	private Constant showInMenus = Constant.YES;
+	@Enumerated(EnumType.STRING)
+	private Constant showMenus = Constant.YES;
 
 	/**
 	 * @return the name
@@ -102,10 +103,10 @@ public class App extends StatusEntity {
 	}
 
 	/**
-	 * @return the showInMenus
+	 * @return the showMenus
 	 */
-	public Constant getShowInMenus() {
-		return showInMenus;
+	public Constant getShowMenus() {
+		return showMenus;
 	}
 
 	/**
@@ -128,7 +129,7 @@ public class App extends StatusEntity {
 		res.put("ctlUrl", this.ctlUrl);
 		res.put("iconClass", this.iconClass);
 		res.put("sort", this.sort);
-		res.put("showInMenus", this.showInMenus);
+		res.put("showMenus", this.showMenus);
 		return res;
 	}
 
@@ -144,7 +145,7 @@ public class App extends StatusEntity {
 		this.setCtlName(ParamUtils.getString(params, "ctlName", ""));
 		this.setCtlUrl(ParamUtils.getString(params, "ctlUrl", ""));
 		this.setSort(ParamUtils.getInteger(params, "sort", 0));
-		this.setShowInMenus(ParamUtils.getEnum(params, "showInMenus", Constant.values()));
+		this.setShowMenus(ParamUtils.getEnum(params, "showInMenus", Constant.values()));
 		this.setIconClass(ParamUtils.getString(params, "iconClass", ""));
 	}
 	
@@ -160,7 +161,7 @@ public class App extends StatusEntity {
 		app.setCtlName(this.ctlName);
 		app.setCtlUrl(this.ctlUrl);
 		app.setSort(this.sort);
-		app.setShowInMenus(this.showInMenus);
+		app.setShowMenus(this.showMenus);
 		app.setIconClass(this.iconClass);
 		return app;
 	}
@@ -222,10 +223,10 @@ public class App extends StatusEntity {
 	}
 
 	/**
-	 * @param showInMenus the showInMenus to set
+	 * @param showMenus the showMenus to set
 	 */
-	protected void setShowInMenus(Constant showInMenus) {
-		this.showInMenus = showInMenus;
+	protected void setShowMenus(Constant showMenus) {
+		this.showMenus = showMenus;
 	}
 
 	/**

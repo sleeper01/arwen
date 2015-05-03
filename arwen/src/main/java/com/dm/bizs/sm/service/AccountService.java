@@ -132,7 +132,7 @@ public class AccountService extends AbstractService<Account> {
 						type = app.getAppType().pureEntity(this.initSortedAppSet());
 						appTypes.add(type);
 					}
-					if(Constant.YES.equals(app.getShowInMenus())){
+					if(Constant.YES.equals(app.getShowMenus())){
 						type.addApp(app.pureEntity());
 					}
 					apps.add(app.pureEntity());
