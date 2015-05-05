@@ -3,8 +3,9 @@
  */
 package com.dm.bizs.sm.service;
 
-import java.util.List;
+import java.util.Collection;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,9 +19,11 @@ import com.dm.bizs.sm.domain.model.Account;
 import com.dm.bizs.sm.domain.model.App;
 import com.dm.bizs.sm.domain.model.Role;
 import com.dm.common.dao.AbstractDao;
+import com.dm.common.domain.model.GenericObjectCallBack;
 import com.dm.common.exception.MyRuntimeException;
 import com.dm.common.service.AbstractService;
 import com.dm.common.utils.ParamUtils;
+import com.dm.common.utils.SerializeUtils;
 
 /**
  * @author Administrator
@@ -88,6 +91,28 @@ public class RoleService extends AbstractService<Role> {
 		role.addApp(app);
 		super.update(role);
 	}
+	
+	/**
+	 * @param params
+	 */
+	public void addApps(Map<Object, Object> params){
+		Role role = this.getEntity(params);
+		role.removeAllApps();
+		Set<App> apps = ParamUtils.getObjects(params, "apps", new GenericObjectCallBack<App>() {
+
+			/* (non-Javadoc)
+			 * @see com.dm.common.domain.model.GenericObjectCallBack#genericObjects(java.util.Map)
+			 */
+			@Override
+			public App genericObjects(Map<Object, Object> params) {
+				return appDao.get(ParamUtils.getString(params, "id", ""));
+			}
+		});
+		for(App app : apps){
+			role.addApp(app);
+		}
+		super.update(role);
+	}
 
 	/**
 	 * @param params
@@ -106,8 +131,16 @@ public class RoleService extends AbstractService<Role> {
 	 * @see com.dm.common.service.AbstractService#getList(java.util.Map)
 	 */
 	@Override
-	public List<Map<Object, Object>> getList(Map<Object, Object> params) {
-		return null;
+	public Collection<Map<Object, Object>> getList(Map<Object, Object> params) {
+		return SerializeUtils.convertEntitiesToMaps(dao.findAll());
+	}
+
+	/* (non-Javadoc)
+	 * @see com.dm.common.service.AbstractService#getEntityMap(java.lang.String)
+	 */
+	@Override
+	public Map<Object, Object> getEntityMap(String id) {
+		return super.getEntityMap(id);
 	}
 
 	/* (non-Javadoc)

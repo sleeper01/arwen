@@ -132,6 +132,21 @@ public class App extends StatusEntity {
 		res.put("showMenus", this.showMenus);
 		return res;
 	}
+	public Map<Object, Object> toEnableMap() {
+		if(Status.ENABLE.equals(this.getStatus())){
+			Map<Object, Object> res = super.toMap();
+			res.put("name", this.name);
+			res.put("stateName", this.stateName);
+			res.put("templateUrl", this.templateUrl);
+			res.put("ctlName", this.ctlName);
+			res.put("ctlUrl", this.ctlUrl);
+			res.put("iconClass", this.iconClass);
+			res.put("sort", this.sort);
+			res.put("showMenus", this.showMenus);
+			return res;
+		}
+		return null;
+	}
 
 	/* (non-Javadoc)
 	 * @see com.dm.common.domain.model.StatusEntity#caseCade(java.util.Map)
@@ -145,7 +160,7 @@ public class App extends StatusEntity {
 		this.setCtlName(ParamUtils.getString(params, "ctlName", ""));
 		this.setCtlUrl(ParamUtils.getString(params, "ctlUrl", ""));
 		this.setSort(ParamUtils.getInteger(params, "sort", 0));
-		this.setShowMenus(ParamUtils.getEnum(params, "showInMenus", Constant.values()));
+		this.setShowMenus(ParamUtils.getEnum(params, "showMenus", Constant.values()));
 		this.setIconClass(ParamUtils.getString(params, "iconClass", ""));
 	}
 	

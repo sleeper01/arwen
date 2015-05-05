@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dm.bizs.sm.domain.model.Account;
@@ -80,6 +81,12 @@ public class AccountController extends AbstractController<Account> {
 	public Object getList(@RequestBody Map<Object,Object>params,HttpServletRequest request,HttpServletResponse response){
 		super.getSessionAccount(params, request);
 		return service.getList(params);
+	}
+	
+	@RequestMapping("/getAccountByNameLike")
+	@ResponseBody
+	public Object getAccountByNameLike(@RequestParam("q") String q,@RequestParam("page_limit") Integer page_limit,HttpServletRequest request,HttpServletResponse response){
+		return service.getAccountByNameLike(q, page_limit);
 	}
 	
 	/* (non-Javadoc)

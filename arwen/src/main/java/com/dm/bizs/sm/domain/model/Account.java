@@ -12,6 +12,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.dm.common.domain.model.StatusEntity;
@@ -35,6 +36,9 @@ public class Account extends StatusEntity {
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST,targetEntity=Role.class,mappedBy="accounts")
 	private Set<Role> roles = new HashSet<>();
+	
+	@OneToOne(mappedBy = "account")
+	private User user;
 
 	/**
 	 * @return the name
@@ -55,6 +59,13 @@ public class Account extends StatusEntity {
 	 */
 	public Set<Role> getRoles() {
 		return roles;
+	}
+
+	/**
+	 * @return the user
+	 */
+	public User getUser() {
+		return user;
 	}
 
 	/*
@@ -147,5 +158,12 @@ public class Account extends StatusEntity {
 	 */
 	protected void setRoles(Set<Role> roles) {
 		this.roles = roles;
+	}
+
+	/**
+	 * @param user the user to set
+	 */
+	protected void setUser(User user) {
+		this.user = user;
 	}
 }

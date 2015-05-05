@@ -102,6 +102,25 @@ public class AppType extends StatusEntity {
 		res.put("apps", apps);
 		return res;
 	}
+	
+	public Map<Object, Object> toEnableMap() {
+		if(Status.ENABLE.equals(this.getStatus())){
+			Map<Object, Object> res = super.toMap();
+			res.put("name", this.name);
+			res.put("sort", this.sort);
+			res.put("iconClass", this.iconClass);
+			List<Map<Object,Object>> apps = new ArrayList<>();
+			for(App app : this.apps){
+				Map<Object, Object> _app = app.toEnableMap();
+				if(_app != null){
+					apps.add(_app);
+				}
+			}
+			res.put("apps", apps);
+			return res;
+		}
+		return null;
+	}
 
 	/* (non-Javadoc)
 	 * @see com.dm.common.domain.model.StatusEntity#caseCade(java.util.Map)

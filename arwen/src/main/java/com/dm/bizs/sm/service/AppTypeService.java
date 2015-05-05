@@ -3,6 +3,7 @@
  */
 package com.dm.bizs.sm.service;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Map;
@@ -76,6 +77,20 @@ public class AppTypeService extends AbstractService<AppType> {
 		Set<AppType> set = this.initSortedSet();
 		set.addAll(dao.getAppTypes());
 		return SerializeUtils.convertEntitiesToMaps(set);
+	}
+	
+	/**
+	 * @param params
+	 * @return
+	 */
+	public Collection<Map<Object, Object>> getEnableList(Map<Object, Object> params) {
+		Set<AppType> set = this.initSortedSet();
+		set.addAll(dao.getAppTypes());
+		Collection<Map<Object, Object>> res = new ArrayList<>();
+		for(AppType type : set){
+			res.add(type.toEnableMap());
+		}
+		return res;
 	}
 
 	/*

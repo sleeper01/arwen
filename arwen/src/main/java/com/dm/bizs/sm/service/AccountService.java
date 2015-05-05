@@ -179,6 +179,15 @@ public class AccountService extends AbstractService<Account> {
 		account.caseCade(params);
 		super.update(account);
 	}
+	
+	/**
+	 * @param q
+	 * @param page_limit
+	 * @return
+	 */
+	public Object getAccountByNameLike(final String q,final Integer page_limit){
+		return dao.getAccountByNameLike(q, page_limit);
+	}
 
 	/* (non-Javadoc)
 	 * @see com.dm.common.service.AbstractService#getDao()

@@ -38,6 +38,13 @@ public class AppTypeController extends AbstractController<AppType> {
 		return service.getList(params);
 	}
 	
+	@RequestMapping("/getEnableList")
+	@ResponseBody
+	public Object getEnableList(@RequestBody Map<Object,Object>params,HttpServletRequest request,HttpServletResponse response){
+		super.getSessionAccount(params, request);
+		return service.getEnableList(params);
+	}
+	
 	@RequestMapping("/addApp")
 	@ResponseBody
 	public Object addApp(@RequestBody Map<Object,Object>params,HttpServletRequest request,HttpServletResponse response){

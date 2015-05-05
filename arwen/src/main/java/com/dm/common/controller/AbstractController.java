@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.persistence.MappedSuperclass;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -53,6 +54,13 @@ public abstract class AbstractController<T extends IEntity> {
 	@RequestMapping("/get")
 	public @ResponseBody Object get(String id){
 		return this.getService().getEntityMap(id);
+	}
+	
+	@RequestMapping("/getList")
+	@ResponseBody
+	public Object getList(@RequestBody Map<Object,Object>params,HttpServletRequest request,HttpServletResponse response){
+		this.getSessionAccount(params, request);
+		return getService().getList(params);
 	}
 	
 	@ExceptionHandler  

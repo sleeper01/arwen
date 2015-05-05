@@ -2,7 +2,7 @@ define(['/arwen/resources/metronic/assets/global/plugins/bootstrap-growl/jquery.
 	app.factory('BubbleMessage',function(){
 		return{
 			show : function(opt){
-				$.bootstrapGrowl(opt.msg, {
+				$.bootstrapGrowl(opt.msg || '未知类型错误', {
                     ele: 'body', // which element to append to
                     type: opt.type || 'info', // (null, 'info', 'danger', 'success', 'warning')
                     offset: {

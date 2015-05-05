@@ -40,7 +40,7 @@ define([
                 	if(data){
                 		if(data.authApps.length > 0){
                 			angular.forEach(data.authApps,function(app){
-                				$stateProvider.state(app.stateName,{
+                				$stateProvider.state(app.stateName.split(":")[0],{
             	    				url : '/'+app.stateName,
             	    				templateUrl : app.templateUrl,
             	    				controller : app.ctlName,
@@ -73,7 +73,7 @@ define([
 	        	template: '<div></div>'        	
 	        });
 		    
-		}).run(['$rootScope','$http',function($rootScope,$http){
+		}).run(['$rootScope','$http','$ocLazyLoad',function($rootScope,$http,$ocLazyLoad){
 			$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){ 
                 console.log("State Change: transition begins!");
                 $http({

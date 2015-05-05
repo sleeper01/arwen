@@ -16,6 +16,7 @@ import javax.persistence.Table;
 
 import com.dm.common.domain.model.StatusEntity;
 import com.dm.common.utils.ParamUtils;
+import com.dm.common.utils.SerializeUtils;
 
 /**
  * @author Administrator
@@ -83,6 +84,8 @@ public class Role extends StatusEntity {
 	public Map<Object, Object> toMap() {
 		Map<Object, Object>res = super.toMap();
 		res.put("name", this.getName());
+		res.put("accounts", SerializeUtils.convertEntitiesToMaps(this.accounts));
+		res.put("apps", SerializeUtils.convertEntitiesToMaps(this.apps));
 		return res;
 	}
 
@@ -111,6 +114,13 @@ public class Role extends StatusEntity {
 		if(app != null){
 			this.apps.remove(app);
 		}
+	}
+	
+	/**
+	 * 
+	 */
+	public void removeAllApps(){
+		this.apps.clear();
 	}
 
 	/**
