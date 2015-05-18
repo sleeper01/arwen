@@ -1,0 +1,86 @@
+<div id="question-search-panel" class="modal fade" tabindex="-1" data-backdrop="static"
+	data-keyboard="false">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true"></button>
+				<h4 class="modal-title">问题筛选</h4>
+			</div>
+			<div class="modal-body">
+				<form role="form">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group form-md-line-input has-success">
+								<input type="text" class="form-control" id="form_control_1" ng-model="params.subject" placeholder="关键字">
+								<div class="form-control-focus">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group form-md-line-input has-success">
+								<input type="text" class="form-control" id="form_control_1" ng-model="params.score" placeholder="分值">
+								<div class="form-control-focus">
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group form-md-line-input has-success">
+								<select class="form-control" id="form_control_1" ng-model="params.type" placeholder="类型">
+									<option value="">请选择类型</option>
+									<option value="SINGLE_SELECTION">单选</option>
+									<option value="MULTI_SELECTIION">多选</option>
+									<option value="SUBJECTIVITY">主观</option>
+									<option value="SORT">排序</option>
+									<option value="MARK">评价</option>
+									<option value="GRADE">打分</option>
+								</select>
+								<div class="form-control-focus">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group form-md-line-input has-success">
+								<input type="text" class="form-control" id="form_control_1" ng-model="params.firLevelLabel" placeholder="一级标签">
+								<div class="form-control-focus">
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group form-md-line-input has-success">
+								<input type="text" class="form-control" id="form_control_1" ng-model="params.secLevelLabel" placeholder="二级标签">
+								<div class="form-control-focus">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group form-md-line-input has-success">
+								<input class="form-control form-control-inline input-medium date-picker" size="16" type="text" value="" ng-model="params.updateTimeBegin" placeholder="起始时间">
+								<div class="form-control-focus">
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group form-md-line-input has-success">
+								<input class="form-control form-control-inline input-medium date-picker" size="16" type="text" value="" ng-model="params.updateTimeEnd" placeholder="结束时间">
+								<div class="form-control-focus">
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" data-dismiss="modal" class="btn default">取消</button>
+				<button type="button" class="btn blue-hoki" ng-click="clearSearch()">清空</button>
+				<button type="button" data-dismiss="modal" class="btn green" ng-click="search()">查询</button>
+			</div>
+		</div>
+	</div>
+</div>

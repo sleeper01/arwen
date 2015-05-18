@@ -1,0 +1,152 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="portlet light">
+			<div class="portlet-title">
+				<div class="caption font-red-sunglo">
+					<i class="icon-settings font-red-sunglo"></i>
+					<span class="caption-subject bold uppercase"> 题目编辑</span>
+				</div>
+			</div>
+			<div class="portlet-body form">
+				<form role="form" class="form-horizontal">
+					<div class="form-body">
+						<div class="form-group form-md-line-input">
+							<label class="col-md-2 control-label" for="form_control_1">题干</label>
+							<div class="col-md-10">
+								<textarea class="form-control" rows="3" placeholder="题干" ng-model="model.subject"></textarea>
+								<div class="form-control-focus">
+								</div>
+							</div>
+						</div>
+						<div class="form-group form-md-line-input">
+							<label class="col-md-2 control-label" for="form_control_1">分值</label>
+							<div class="col-md-10">
+								<input type="text" class="form-control" id="form_control_1" placeholder="分值" ng-model="model.score">
+								<div class="form-control-focus">
+								</div>
+							</div>
+						</div>
+						<div class="form-group form-md-line-input">
+							<label class="col-md-2 control-label" for="form_control_1">题目类型</label>
+							<div class="col-md-10">
+								<select class="form-control" id="form_control_1" ng-model="model.type">
+									<option value="SINGLE_SELECTION">单选</option>
+									<option value="MULTI_SELECTIION">多选</option>
+									<option value="SUBJECTIVITY">主观</option>
+									<option value="SORT">排序</option>
+									<option value="MARK">评价</option>
+									<option value="GRADE">打分</option>
+								</select>
+								<div class="form-control-focus">
+								</div>
+							</div>
+						</div>
+						<div class="form-group form-md-line-input">
+							<label class="col-md-2 control-label" for="form_control_1">一级标签</label>
+							<div class="col-md-10">
+								<select class="form-control" id="form_control_1" ng-model="model.firLevelLabel">
+									<option value=""></option>
+									<option ng-repeat="la in firLevelLabelList" value="{{la.name}}">{{la.name}}</option>
+								</select>
+								<div class="form-control-focus">
+								</div>
+							</div>
+						</div>
+						<div class="form-group form-md-line-input">
+							<label class="col-md-2 control-label" for="form_control_1">二级标签</label>
+							<div class="col-md-10">
+								<select class="form-control" id="form_control_1" ng-model="model.secLevelLabel">
+									<option value=""></option>
+									<option ng-repeat="la in secLevelLabelList" value="{{la.name}}">{{la.name}}</option>
+								</select>
+								<div class="form-control-focus">
+								</div>
+							</div>
+						</div>
+						<div class="form-group form-md-line-input">
+							<label class="col-md-2 control-label" for="form_control_1">是否启用</label>
+							<div class="col-md-10">
+								<div class="md-radio-inline">
+									<div class="md-radio">
+										<input type="radio" id="questionStatus1" name="questionStatus" class="md-radiobtn" value="ENABLE" ng-model="model.status">
+										<label for="questionStatus1">
+										<span></span>
+										<span class="check"></span>
+										<span class="box"></span>
+										启用</label>
+									</div>
+									<div class="md-radio">
+										<input type="radio" id="questionStatus2" name="questionStatus" class="md-radiobtn" value="DISABLE" ng-model="model.status">
+										<label for="questionStatus2">
+										<span></span>
+										<span class="check"></span>
+										<span class="box"></span>
+										停用</label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-actions">
+						<div class="row">
+							<div class="col-md-offset-2 col-md-10">
+								<button type="button" class="btn default" ng-click="gotoList()">取消</button>
+								<button type="button" class="btn blue" ng-click="save()">保存</button>
+								<a href="javascript:;" class="btn green" ng-show="showOption" ng-click="addOption()">
+									添加选择 <i class="fa fa-plus"></i>
+								</a>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row" ng-show="showOption">
+	<div class="col-md-12">
+		<div class="portlet box blue-hoki">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="icon-settings"></i>
+					<span class="caption-subject bold uppercase"> 选项编辑</span>
+				</div>
+				<div class="actions">
+					<a href="javascript:;" class="btn btn-default btn-sm" ng-click="addOption()">
+					<i class="fa fa-plus"></i> 添加选择 </a>
+				</div>
+			</div>
+			<div class="portlet-body">
+				<div class="table-scrollable">
+					<table class="table table-bordered table-hover">
+						<thead>
+							<tr>
+								<th>
+									 编号
+								</th>
+								<th>
+									 内容
+								</th>
+								<th>
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="option in model.options">
+								<td ng-bind="option.num">
+								</td>
+								<td ng-bind="option.content">
+								</td>
+								<td>
+									<a href="javascript:;" class="btn default btn-xs blue-stripe" ng-click="editOption($index)">
+										编辑 </a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div ng-include src="'/arwen/bizs/investigate/question/view/option-form.html'"></div>

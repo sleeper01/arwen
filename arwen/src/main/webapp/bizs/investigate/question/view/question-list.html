@@ -1,0 +1,40 @@
+<div infinite-scroll='page.nextPage()' infinite-scroll-disabled='page.busy' infinite-scroll-distance='1'>
+	<div class="row" >
+		<div class="col-md-12">
+			<div class="portlet box blue-hoki">
+				<div class="portlet-title">
+					<div class="caption">
+						<i class="fa fa-gift"></i>题库管理
+					</div>
+					<div class="actions">
+						<a href="javascript:;" class="btn btn-default btn-sm" ng-click="openSearch()">
+						<i class="fa icon-magnifier"></i> 筛选 </a>
+						<a href="javascript:;" class="btn btn-default btn-sm" ng-click="addQuestion()">
+						<i class="fa fa-pencil"></i> 添加题目 </a>
+					</div>
+				</div>
+				<div class="portlet-body">
+					<table class="table table-bordered table-hover">
+						<tbody>
+							<tr ng-repeat="item in list" class="row">
+								<td ng-bind="item.subject">
+								</td>
+								<td ng-bind="item.score" class="col-md-1" style="vertical-align: middle;">
+								</td>
+								<td ng-bind="item.type|questionType" class="col-md-1" style="vertical-align: middle;">
+								</td>
+								<td ng-bind="item.updateTime|date:'yyyy-MM-dd hh:mm:ss.s'" class="col-md-2" style="vertical-align: middle;">
+								</td>
+								<td style="vertical-align: middle;" class="col-md-1">
+									 <a href="javascript:;" class="btn default btn-xs blue-stripe" ng-click="editQuestion(item.id)">
+										编辑 </a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div ng-include src="'/arwen/bizs/investigate/question/view/question-search-panel.html'"></div>

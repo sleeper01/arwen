@@ -1,0 +1,69 @@
+<div id="user-form" class="modal fade" tabindex="-1" data-backdrop="static"
+	data-keyboard="false">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true"></button>
+				<h4 class="modal-title">用户编辑</h4>
+			</div>
+			<div class="modal-body">
+				<form role="form">
+					<div class="form-body">
+						<div class="form-group form-md-line-input">
+							<label class="col-md-2 control-label" for="form_control_1">名称</label>
+							<div class="col-md-10">
+								<input type="text" class="form-control" id="form_control_1" placeholder="用户名称" ng-model="user.name">
+								<div class="form-control-focus">
+								</div>
+							</div>
+						</div>
+						<div class="form-group form-md-line-input">
+							<label class="col-md-2 control-label" for="form_control_1">身份证号</label>
+							<div class="col-md-10">
+								<input type="text" class="form-control" id="form_control_1" placeholder="身份证号" ng-model="user.idCardNum">
+								<div class="form-control-focus">
+								</div>
+							</div>
+						</div>
+						<div class="form-group form-md-line-input">
+							<label class="col-md-2 control-label" for="form_control_1">编号</label>
+							<div class="col-md-10">
+								<input type="text" class="form-control" id="form_control_1" placeholder="编号" ng-model="user.num">
+								<div class="form-control-focus">
+								</div>
+							</div>
+						</div>
+						<div class="form-group form-md-line-input">
+							<label class="col-md-2 control-label" for="form_control_1">手机号</label>
+							<div class="col-md-10">
+								<input type="text" class="form-control" id="form_control_1" placeholder="手机号" ng-model="user.phoneNum">
+								<div class="form-control-focus">
+								</div>
+							</div>
+						</div>
+						<div class="form-group form-md-line-input">
+							<label class="col-md-2 control-label" for="form_control_1">邮箱</label>
+							<div class="col-md-10">
+								<input type="text" class="form-control" id="form_control_1" placeholder="邮箱" ng-model="user.email">
+								<div class="form-control-focus">
+								</div>
+							</div>
+						</div>
+						<div class="form-group form-md-line-input">
+							<label class="col-md-2 control-label" for="form_control_1">备注</label>
+							<div class="col-md-10">
+								<input type="text" class="form-control" id="form_control_1" placeholder="备注" ng-model="user.desp">
+								<div class="form-control-focus">
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn green" ng-click="saveUser()">保存</button>
+			</div>
+		</div>
+	</div>
+</div>

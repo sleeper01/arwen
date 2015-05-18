@@ -1,0 +1,84 @@
+<div id="option-form" class="modal fade" tabindex="-1" data-backdrop="static"
+	data-keyboard="false">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true"></button>
+				<h4 class="modal-title">选项编辑</h4>
+			</div>
+			<div class="modal-body">
+				<form role="form">
+					<div class="form-body">
+						<div class="form-group form-md-line-input">
+							<label class="col-md-2 control-label" for="form_control_1">编号</label>
+							<div class="col-md-10">
+								<input type="text" class="form-control" id="form_control_1" placeholder="选项编号" ng-model="option.num">
+								<div class="form-control-focus">
+								</div>
+							</div>
+						</div>
+						<div class="form-group form-md-line-input">
+							<label class="col-md-2 control-label" for="form_control_1">内容</label>
+							<div class="col-md-10">
+								<input type="text" class="form-control" id="form_control_1" placeholder="选项内容" ng-model="option.content">
+								<div class="form-control-focus">
+								</div>
+							</div>
+						</div>
+						<div class="form-group form-md-line-input">
+							<label class="col-md-2 control-label" for="form_control_1">是否备注</label>
+							<div class="col-md-10">
+								<div class="md-radio-inline">
+									<div class="md-radio">
+										<input type="radio" id="remarkable1" name="remarkable" class="md-radiobtn" value="NO" ng-model="option.remarkable">
+										<label for="remarkable1">
+										<span></span>
+										<span class="check"></span>
+										<span class="box"></span>
+										否</label>
+									</div>
+									<div class="md-radio">
+										<input type="radio" id="remarkable2" name="remarkable" class="md-radiobtn" value="YES" ng-model="option.remarkable">
+										<label for="remarkable2">
+										<span></span>
+										<span class="check"></span>
+										<span class="box"></span>
+										是</label>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="form-group form-md-line-input">
+							<label class="col-md-2 control-label" for="form_control_1">是否启用</label>
+							<div class="col-md-10">
+								<div class="md-radio-inline">
+									<div class="md-radio">
+										<input type="radio" id="optionStatus1" name="optionStatus" class="md-radiobtn" value="ENABLE" ng-model="option.status">
+										<label for="optionStatus1">
+										<span></span>
+										<span class="check"></span>
+										<span class="box"></span>
+										是</label>
+									</div>
+									<div class="md-radio">
+										<input type="radio" id="optionStatus2" name="optionStatus" class="md-radiobtn" value="DISABLE" ng-model="option.status">
+										<label for="optionStatus2">
+										<span></span>
+										<span class="check"></span>
+										<span class="box"></span>
+										否</label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" data-dismiss="modal" class="btn default" ng-click="cancel()">取消</button>
+				<button type="button" data-dismiss="modal" class="btn green" ng-click="saveOption()">保存</button>
+			</div>
+		</div>
+	</div>
+</div>
