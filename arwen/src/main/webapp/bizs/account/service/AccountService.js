@@ -6,7 +6,10 @@ define(['/arwen/bizs/common/service/http.js'],function(){
 			},
 			save : function(data){
 				return httpService.post('/arwen/account/persist.qh',data);
-			}
+			},
+			getParties : function(){
+				return httpService.post('/arwen/party/getParties.qh',{});
+			},
 		};
 	}]);
 });

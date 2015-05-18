@@ -3,7 +3,9 @@
  */
 package com.dm.bizs.sm.service;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +47,14 @@ public class DeptService extends AbstractService<Dept> {
 		super.update(params);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.dm.common.service.AbstractService#getEntityMap(java.lang.String)
+	 */
+	@Override
+	public Map<Object, Object> getEntityMap(String id) {
+		return super.getEntityMap(id);
+	}
+
 	/**
 	 * @param params
 	 */
@@ -72,7 +82,12 @@ public class DeptService extends AbstractService<Dept> {
 	 */
 	@Override
 	public Collection<Map<Object, Object>> getList(Map<Object, Object> params) {
-		return null;
+		List<Dept> parties = dao.getDepts(params);
+		List<Map<Object, Object>> res = new ArrayList<>();
+		for(Dept p : parties){
+			res.add(p.toNode());
+		}
+		return res;
 	}
 
 	/* (non-Javadoc)

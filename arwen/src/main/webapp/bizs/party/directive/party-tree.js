@@ -3,15 +3,17 @@ define(['/arwen/resources/metronic/assets/global/plugins/jstree/dist/jstree.js']
 		return {
 			restrict : 'A',
 			scope : {
-				createParty : '&',
-				editParty : '&'
+				create : '&',
+				edit : '&',
+				refresh : '=',
+				deptId : '='
 			},
 			link : function(scope,ele,attrs){
 				$ocLazyLoad.load([{
 			        name:'com.qh.mainApp',
 			        files : ['/arwen/resources/metronic/assets/global/plugins/jstree/dist/themes/default/style.min.css']
 				}]);
-				ele.jstree({
+				var tree = ele.jstree({
 					"core" : {
 		                "themes" : {
 		                    "responsive": false
@@ -47,27 +49,27 @@ define(['/arwen/resources/metronic/assets/global/plugins/jstree/dist/jstree.js']
 //		        						inst.create_node(obj, {}, "last", function (new_node) {
 //		        							setTimeout(function () { inst.edit(new_node); },0);
 //		        						});
-		        						if(!obj.a_attr.type){
-		        							scope.createParty();
-		        						}
+		        						scope.create(obj.li_attr);
 		        					}
 		        				},
 		        				"rename" : {
 		        					"separator_before"	: false,
 		        					"separator_after"	: false,
 		        					"_disabled"			: false, //(this.check("rename_node", data.reference, this.get_parent(data.reference), "")),
-		        					"label"				: "重命名",
+		        					"label"				: "编辑",
 		        					"action"			: function (data) {
 		        						var inst = $.jstree.reference(data.reference),
 		        							obj = inst.get_node(data.reference);
-		        						inst.edit(obj);
+		        						if(obj.id == "-1")
+		        							return false;
+		        						scope.edit(obj.li_attr);
 		        					}
-		        				},
+		        				}/*,
 		        				"remove" : {
 		        					"separator_before"	: false,
 		        					"icon"				: false,
 		        					"separator_after"	: false,
-		        					"_disabled"			: false, //(this.check("delete_node", data.reference, this.get_parent(data.reference), "")),
+		        					"_disabled"			: false,
 		        					"label"				: "删除",
 		        					"action"			: function (data) {
 		        						var inst = $.jstree.reference(data.reference),
@@ -79,10 +81,26 @@ define(['/arwen/resources/metronic/assets/global/plugins/jstree/dist/jstree.js']
 		        							inst.delete_node(obj);
 		        						}
 		        					}
-		        				}
+		        				}*/
 		        			};
 		        		}
 		            }
+				}).on("changed.jstree", function (e, data) {
+					  if($('.jstree-contextmenu').length == 0 && data.node.li_attr.type == 'dept'){
+						  scope.$apply(function(){
+							  scope.deptId = data.node.id;
+						  });
+					  }
+				});;
+				
+				scope.$watch('refresh',function(v){
+					if(v != ''){
+						if(v.indexOf('#') > 0){
+							tree.jstree().refresh_node(tree.jstree().get_parent(tree.jstree().get_selected()));
+						}else{
+							tree.jstree().refresh_node(tree.jstree().get_selected());
+						}
+					}
 				});
 			}
 		};

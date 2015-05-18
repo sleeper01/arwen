@@ -130,7 +130,7 @@ public class AbstractDao<T extends IEntity> {
 			}
 		}
 		if(page != null && pageSize != null){
-			query.setFirstResult((page-1)*pageSize).setMaxResults(page*pageSize-1);
+			query.setFirstResult((page-1)*pageSize).setMaxResults(page*pageSize);
 		}
 		return query.list();
 	}

@@ -3,8 +3,10 @@
  */
 package com.dm.bizs.sm.domain.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -87,6 +89,11 @@ public class Dept extends StatusEntity {
 	public Map<Object, Object> toMap() {
 		Map<Object,Object> res = super.toMap();
 		res.put("name", this.name);
+		List<Map<Object,Object>> users = new ArrayList<>();
+		for(User u : this.users){
+			users.add(u.toMap());
+		}
+		res.put("users", users);
 		return res;
 	}
 	

@@ -50,6 +50,14 @@ public class PartyService extends AbstractService<Party> {
 		super.update(params);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.dm.common.service.AbstractService#getEntityMap(java.lang.String)
+	 */
+	@Override
+	public Map<Object, Object> getEntityMap(String id) {
+		return super.getEntityMap(id);
+	}
+
 	/**
 	 * @param params
 	 */
@@ -73,6 +81,15 @@ public class PartyService extends AbstractService<Party> {
 			res.add(p.toNode());
 		}
 		return res;
+	}
+	
+	/**
+	 * @param q
+	 * @param page_limit
+	 * @return
+	 */
+	public Object getPartyByNameLike(final String q,final Integer page_limit){
+		return dao.getPartyByNameLike(q, page_limit);
 	}
 
 	/* (non-Javadoc)

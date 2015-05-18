@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.hibernate.Query;
+import org.hibernate.transform.Transformers;
 import org.springframework.stereotype.Repository;
 
 import com.dm.bizs.sm.domain.model.Party;
@@ -34,5 +36,16 @@ public class PartyDao extends AbstractDao<Party> {
 			}
 		}
 		return super.find(hql.toString(), args.toArray());
+	}
+	
+	/**
+	 * @param q
+	 * @param page_limit
+	 * @return
+	 */
+	public Object getPartyByNameLike(final String q,final Integer page_limit){
+		String hql = "select id as id,name as text from Party where name like '%"+q+"%'";
+		Query query = super.getSessJionFactory().getCurrentSession().createQuery(hql).setFirstResult(0).setMaxResults(page_limit).setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+		return query.list();
 	}
 }

@@ -1,9 +1,10 @@
 define(['../service/AccountService.js',
         '../../common/service/bubble-message.js',
         '../../common/filter/status-filter.js',
-        '../../common/component/comfirmation-component.js'],function(){
+        '../../common/component/comfirmation-component.js',
+        '../../common/component/selector-component.js'],function(){
 	app.controller('AccountListController',['$scope','AccountService','BubbleMessage',function($scope,service,bubbleMessage){
-		$scope.list = [],$scope.account = {};
+		$scope.list = [],$scope.account = {},$scope.partyList=[];
 		$scope.load = function(){
 			service.getList().then(function(data){
 				$scope.list = data;
@@ -35,5 +36,9 @@ define(['../service/AccountService.js',
 				$scope.load();
 			});
 		};
+		
+		service.getParties().then(function(data){
+			$scope.partyList = data;
+		});
 	}]);
 });

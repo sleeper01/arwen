@@ -5,7 +5,7 @@ define([
     'angularCookies'
     ],
 	function() {
-		app = angular.module('com.qh.mainApp', ['ui.router', 'ct.ui.router.extras','oc.lazyLoad','ngCookies'])
+		app = angular.module('com.qh.mainApp', ['ui.router', 'ct.ui.router.extras','oc.lazyLoad','ngCookies','angularFileUpload','infinite-scroll'])
 		.config(function($locationProvider, $stateProvider, $futureStateProvider, $ocLazyLoadProvider,$provide) {
 
 		    // Set the app module as loaded

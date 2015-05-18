@@ -220,6 +220,9 @@ public class AccountService extends AbstractService<Account> {
 			 */
 			@Override
 			public int compare(App o1, App o2) {
+				if(o1.getSort().equals(o2.getSort())){
+					return o1.getId().compareTo((o2.getId()));
+				}
 				return o1.getSort().compareTo(o2.getSort());
 			}
 		});

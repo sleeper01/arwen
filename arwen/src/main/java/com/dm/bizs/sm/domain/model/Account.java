@@ -39,6 +39,12 @@ public class Account extends StatusEntity {
 	
 	@OneToOne(mappedBy = "account")
 	private User user;
+	
+	@Column
+	private String partyId;
+	
+	@Column
+	private String partyName;
 
 	/**
 	 * @return the name
@@ -68,6 +74,20 @@ public class Account extends StatusEntity {
 		return user;
 	}
 
+	/**
+	 * @return the partyId
+	 */
+	public String getPartyId() {
+		return partyId;
+	}
+
+	/**
+	 * @return the partyName
+	 */
+	public String getPartyName() {
+		return partyName;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -77,6 +97,8 @@ public class Account extends StatusEntity {
 	public Map<Object, Object> toMap() {
 		Map<Object, Object> res = super.toMap();
 		res.put("name", this.name);
+		res.put("partyId", this.partyId);
+		res.put("partyName",this.partyName);
 		return res;
 	}
 
@@ -89,7 +111,9 @@ public class Account extends StatusEntity {
 	public void caseCade(Map<Object, Object> params) {
 		super.caseCade(params);
 		this.setName(ParamUtils.getString(params, "name", ""));
-		if(!"".equals(ParamUtils.getString(params, "id", ""))){
+		this.setPartyId(ParamUtils.getString(params, "partyId", ""));
+		this.setPartyName(ParamUtils.getString(params, "partyName", ""));
+		if("".equals(ParamUtils.getString(params, "id", ""))){
 			this.setPwd(PwdUtils.parseStrToMd5U32(ParamUtils.getString(params, "pwd", "000000")));
 		}
 	}
@@ -165,5 +189,19 @@ public class Account extends StatusEntity {
 	 */
 	protected void setUser(User user) {
 		this.user = user;
+	}
+
+	/**
+	 * @param partyId the partyId to set
+	 */
+	protected void setPartyId(String partyId) {
+		this.partyId = partyId;
+	}
+
+	/**
+	 * @param partyName the partyName to set
+	 */
+	protected void setPartyName(String partyName) {
+		this.partyName = partyName;
 	}
 }

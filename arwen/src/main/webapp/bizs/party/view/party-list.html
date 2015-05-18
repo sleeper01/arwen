@@ -1,6 +1,61 @@
 <div class="row">
-	<div class="col-md-6">
-		<div party-tree create-party="partyCreate()" edit-party="partyEdit()"></div>
+	<div class="col-md-3">
+		<div party-tree create="create(id,type)" edit="edit(id,type)" refresh="refresh" dept-id="deptId"></div>
+	</div>
+	<div class="col-md-9" ng-show="deptId != ''">
+		<!-- BEGIN SAMPLE TABLE PORTLET-->
+		<div class="portlet box blue">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="fa fa-comments"></i>用户列表
+				</div>
+				<div class="actions">
+					<a href="javascript:;" class="btn btn-default btn-sm" ng-click="addUser()">
+					<i class="fa fa-plus"></i> 添加用户 </a>
+				</div>
+			</div>
+			<div class="portlet-body">
+				<div class="table-scrollable">
+					<table class="table table-bordered table-hover">
+					<thead>
+					<tr>
+						<th>
+							 #
+						</th>
+						<th>
+							 姓名
+						</th>
+						<th>
+							 编号
+						</th>
+						<th>
+							 手机号
+						</th>
+						<th>
+							 邮箱
+						</th>
+						<th></th>
+					</tr>
+					</thead>
+					<tbody>
+						<tr ng-class="{'active':$index%2==0,'success':$index%2==1}" ng-repeat="user in users">
+							<td ng-bind="$index+1"></td>
+							<td ng-bind="user.name"></td>
+							<td ng-bind="user.num"></td>
+							<td ng-bind="user.phoneNum"></td>
+							<td ng-bind="user.email"></td>
+							<td>
+								<a href="javascript:;" class="btn default btn-xs purple" ng-click="editUser($index)">
+										<i class="fa fa-edit"></i> 编辑 </a>
+							</td>
+						</tr>
+					</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
 <div ng-include src="'/arwen/bizs/party/view/party-form.html'"></div>
+<div ng-include src="'/arwen/bizs/party/view/dept-form.html'"></div>
+<div ng-include src="'/arwen/bizs/party/view/user-form.html'"></div>

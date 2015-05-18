@@ -19,6 +19,15 @@
 							</div>
 						</div>
 						<div class="form-group form-md-line-input">
+							<label class="col-md-2 control-label" for="form_control_1">所属公司</label>
+							<div class="col-md-10">
+								<!-- <input type="hidden" selector-component config="config" class="form-control select2"> -->
+								<select ng-model="account.partyId" class="form-control">
+									<option ng-repeat="party in partyList" value="{{party.id}}">{{party.text}}</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group form-md-line-input">
 							<label class="col-md-2 control-label" for="form_control_1">是否启用</label>
 							<div class="col-md-10">
 								<div class="md-radio-inline">

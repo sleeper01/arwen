@@ -77,7 +77,10 @@ public abstract class AbstractService<T extends IEntity> {
 	 * @return
 	 */
 	protected T get(String id){
-		return getDao().get(id);
+		T entity = getDao().get(id);
+		if(entity == null)
+			throw new MyRuntimeException(String.format("id为%s的实体不存在.", id));
+		return entity;
 	}
 	
 	/**

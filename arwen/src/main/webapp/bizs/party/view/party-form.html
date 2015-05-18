@@ -21,16 +21,15 @@
 						<div class="form-group form-md-line-input">
 							<label class="col-md-2 control-label" for="form_control_1">logo</label>
 							<div class="col-md-10">
-								<input type="text" class="form-control" id="form_control_1" placeholder="单位名称" ng-model="party.name">
-								<div class="form-control-focus">
-								</div>
+								<input type="file" nv-file-select="" uploader="uploader" style="margin-top:10px;" ng-show="!party.id || party.logoUrl == ''">
+								<a href="javascript:;" ng-click="clearPartyLogo()" ng-show="party.id&&party.logoUrl != ''" title="点击删除图片">{{party.logoUrl}}</a>
 							</div>
 						</div>
 					</div>
 				</form>
 			</div>
 			<div class="modal-footer">
-				<button type="button" data-dismiss="modal" class="btn green" ng-click="saveParty()">保存</button>
+				<button type="button" class="btn green" ng-click="saveParty()">保存</button>
 			</div>
 		</div>
 	</div>
