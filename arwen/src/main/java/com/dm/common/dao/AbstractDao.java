@@ -38,7 +38,7 @@ public class AbstractDao<T extends IEntity> {
 	/**
 	 * @return
 	 */
-	protected SessionFactory getSessJionFactory(){
+	protected SessionFactory getSessionFactory(){
 		return sessionFactory;
 	}
 	

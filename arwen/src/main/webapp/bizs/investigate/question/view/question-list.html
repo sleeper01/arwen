@@ -15,15 +15,32 @@
 				</div>
 				<div class="portlet-body">
 					<table class="table table-bordered table-hover">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>题干</th>
+								<th class="">一级标签</th>
+								<th class="">二级标签</th>
+								<th class="">分值</th>
+								<th class="">类型</th>
+								<th class="">更新时间</th>
+								<th class=""></th>
+							</tr>
+						</thead>
 						<tbody>
-							<tr ng-repeat="item in list" class="row">
+							<tr ng-repeat="item in list">
+								<td ng-bind="$index+1" width="5%" style="vertical-align: middle;"></td>
 								<td ng-bind="item.subject">
+								</td>
+								<td ng-bind="item.firLevelLabel" class="col-md-1" style="vertical-align: middle;">
+								</td>
+								<td ng-bind="item.secLevelLabel" class="col-md-1" style="vertical-align: middle;">
 								</td>
 								<td ng-bind="item.score" class="col-md-1" style="vertical-align: middle;">
 								</td>
 								<td ng-bind="item.type|questionType" class="col-md-1" style="vertical-align: middle;">
 								</td>
-								<td ng-bind="item.updateTime|date:'yyyy-MM-dd hh:mm:ss.s'" class="col-md-2" style="vertical-align: middle;">
+								<td ng-bind="item.updateTime|date:'yyyy-MM-dd hh:mm:ss'" class="col-md-2" style="vertical-align: middle;">
 								</td>
 								<td style="vertical-align: middle;" class="col-md-1">
 									 <a href="javascript:;" class="btn default btn-xs blue-stripe" ng-click="editQuestion(item.id)">

@@ -62,6 +62,10 @@ public abstract class AbstractService<T extends IEntity> {
 		return null;
 	}
 	
+	public Object getPageList(Map<Object,Object>params,Integer page,Integer pageSize){
+		return null;
+	}
+	
 	/**
 	 * @param params
 	 * @return

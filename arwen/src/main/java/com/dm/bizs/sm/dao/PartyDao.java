@@ -45,7 +45,7 @@ public class PartyDao extends AbstractDao<Party> {
 	 */
 	public Object getPartyByNameLike(final String q,final Integer page_limit){
 		String hql = "select id as id,name as text from Party where name like '%"+q+"%'";
-		Query query = super.getSessJionFactory().getCurrentSession().createQuery(hql).setFirstResult(0).setMaxResults(page_limit).setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+		Query query = super.getSessionFactory().getCurrentSession().createQuery(hql).setFirstResult(0).setMaxResults(page_limit).setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
 		return query.list();
 	}
 }
