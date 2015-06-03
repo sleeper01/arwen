@@ -3,6 +3,12 @@ define(['/arwen/bizs/common/service/http.js'],function(){
 		return {
 			getQuestionaireList : function(params,page,pageSize){
 				return httpService.post('/arwen/questionaire/getPageList.qh?page='+page+'&pageSize='+pageSize,params);
+			},
+			save : function(data){
+				return httpService.post('/arwen/questionaire/persist.qh',data,true);
+			},
+			get : function(id){
+				return httpService.get('/arwen/questionaire/get.qh?id='+id);
 			}
 		};
 	}]);

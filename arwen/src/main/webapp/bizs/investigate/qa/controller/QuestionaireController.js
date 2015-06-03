@@ -1,6 +1,6 @@
 define(['../service/QuestionaireService.js'],function(){
 	app.controller('QuestionaireController',['$scope','QuestionaireService','$state',function($scope,service,$state){
-		$scope.list=[];
+		$scope.list=[],$scope.params={};
 		$scope.page={
 			busy:false,
 			start : 1,
@@ -27,6 +27,11 @@ define(['../service/QuestionaireService.js'],function(){
 		
 		$scope.addQA = function(){
 			$state.go('qa-form');
+		};
+		$scope.editQA = function(id){
+			$state.go('qa-form',{
+				id : id
+			});
 		};
 	}]);
 });

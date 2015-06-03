@@ -95,8 +95,13 @@ public class Questionaire extends StatusEntity {
 	 */
 	@Override
 	public Map<Object, Object> toMap() {
-		// TODO Auto-generated method stub
-		return super.toMap();
+		Map<Object, Object> res = super.toMap();
+		res.put("title", this.title);
+		res.put("subtitle", this.subtitle);
+		res.put("desp", this.desp);
+		res.put("nameless", this.nameless);
+		res.put("expireDate", this.expireDate);
+		return res;
 	}
 
 	/* (non-Javadoc)

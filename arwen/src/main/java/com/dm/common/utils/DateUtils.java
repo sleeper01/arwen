@@ -3,6 +3,8 @@
  */
 package com.dm.common.utils;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -15,9 +17,11 @@ public class DateUtils {
 	/**
 	 * @param date
 	 * @return
+	 * @throws ParseException 
 	 */
-	public static Date parseDateTime(String date){
-		return null;
+	public static Date parseDateTime(String date) throws ParseException{
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		return df.parse(date);
 	}
 	
 	/**

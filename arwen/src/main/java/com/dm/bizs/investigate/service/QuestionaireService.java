@@ -16,6 +16,7 @@ import com.dm.bizs.investigate.domain.model.Questionaire;
 import com.dm.common.dao.AbstractDao;
 import com.dm.common.exception.MyRuntimeException;
 import com.dm.common.service.AbstractService;
+import com.dm.common.utils.ParamUtils;
 
 /**
  * @author Administrator
@@ -33,8 +34,21 @@ public class QuestionaireService extends AbstractService<Questionaire> {
 	 */
 	@Override
 	public void create(Map<Object, Object> params) throws MyRuntimeException {
-		// TODO Auto-generated method stub
 		
+	}
+	
+	public Map<Object,Object> create1(Map<Object,Object> params) throws MyRuntimeException {
+		Questionaire qa = new Questionaire();
+		qa.caseCade(params);
+		super.create(qa);
+		return qa.toMap();
+	}
+	
+	public Map<Object,Object> update1(Map<Object,Object> params)throws MyRuntimeException{
+		Questionaire qa = super.get(ParamUtils.getString(params, "id", ""));
+		qa.caseCade(params);
+		super.update(qa);
+		return qa.toMap();
 	}
 
 	/* (non-Javadoc)
