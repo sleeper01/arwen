@@ -6,17 +6,22 @@ define(['../service/QuestionaireService.js',
         '../directive/selection-panel/selection-panel.js',
         '../directive/subjectivity-panel/subjectivity-panel.js'],function(){
 	app.controller('QuestionaireFormController',['$scope','QuestionaireService','$state','$stateParams','BubbleMessage','$ocLazyLoad',function($scope,service,$state,$stateParams,bubbleMessage,$ocLazyLoad){
-		$scope.editBaseInfo = false,$scope.topic={},$scope.curClick={},$scope.ctl={showQuesionPanel:false};
+		$scope.editBaseInfo = false,$scope.topic={},$scope.curClick={},$scope.ctl={showQuesionPanel:false},$scope.typeList=[];
 		$ocLazyLoad.load([{
 	        name:'com.qh.mainApp',
 	        files : ['/arwen/bizs/investigate/resources/qa.css']
 		}]);
+		service.getTypeList().then(function(data){
+			$scope.typeList = data;
+			console.log(data);
+		});
 		$scope.qa = {
 			title : '',
 			subtitle : '',
 			desp : '',
 			nameless : 'NO',
-			expireDate : ''
+			expireDate : '',
+			type : ''
 		};
 		$scope.load = function(){
 			service.get($stateParams.id).then(function(data){
@@ -32,7 +37,8 @@ define(['../service/QuestionaireService.js',
 				subtitle : '',
 				desp : '',
 				nameless : 'NO',
-				expireDate : ''
+				expireDate : '',
+				type : ''
 			};
 			$scope.editBaseInfo = true;
 		}

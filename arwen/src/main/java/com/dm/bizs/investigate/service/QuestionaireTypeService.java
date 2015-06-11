@@ -44,7 +44,7 @@ public class QuestionaireTypeService extends AbstractService<QuestionaireType> {
 	 */
 	@Override
 	public Collection<Map<Object, Object>> getList(Map<Object, Object> params) {
-		return SerializeUtils.convertEntitiesToMaps(dao.findAll());
+		return SerializeUtils.convertEntitiesToMaps(dao.getList(params));
 	}
 
 	/* (non-Javadoc)

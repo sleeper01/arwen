@@ -40,6 +40,9 @@ public class Questionaire extends StatusEntity {
 	private String desp;
 	
 	@Column
+	private String type;
+	
+	@Column
 	@Enumerated(EnumType.STRING)
 	private Constant nameless;
 	
@@ -91,6 +94,13 @@ public class Questionaire extends StatusEntity {
 		return topics;
 	}
 
+	/**
+	 * @return the type
+	 */
+	public String getType() {
+		return type;
+	}
+
 	/* (non-Javadoc)
 	 * @see com.dm.common.domain.model.StatusEntity#toMap()
 	 */
@@ -121,6 +131,7 @@ public class Questionaire extends StatusEntity {
 		this.setDesp(ParamUtils.getString(params, "desp", ""));
 		this.setNameless(ParamUtils.getEnum(params, "nameless", Constant.values()));
 		this.setExpireDate(ParamUtils.getDate(params, "expireDate", new Date()));
+		this.setType(ParamUtils.getString(params, "type", ""));
 	}
 	
 	/**
@@ -182,5 +193,12 @@ public class Questionaire extends StatusEntity {
 	 */
 	protected void setTopics(Set<Topic> topics) {
 		this.topics = topics;
+	}
+
+	/**
+	 * @param type the type to set
+	 */
+	protected void setType(String type) {
+		this.type = type;
 	}
 }

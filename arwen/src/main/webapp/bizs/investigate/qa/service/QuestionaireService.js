@@ -24,6 +24,9 @@ define(['/arwen/bizs/common/service/http.js'],function(){
 			},
 			addQuestion : function(data){
 				return httpService.post('/arwen/topic/addQuestion.qh',data,true);
+			},
+			getTypeList : function(){
+				return httpService.post('/arwen/questionaireType/getList.qh',{status:'ENABLE'});
 			}
 		};
 	}]);
