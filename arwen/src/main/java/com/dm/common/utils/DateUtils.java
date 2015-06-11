@@ -32,4 +32,9 @@ public class DateUtils {
 		SimpleDateFormat formatter= new SimpleDateFormat ("yyyyMMdd");
 		return formatter.format(date);
 	}
+	
+	public static String getDateTimeStr(Date date) {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		return format.format(date);
+	}
 }

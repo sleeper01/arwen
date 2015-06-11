@@ -1,0 +1,40 @@
+<div id="qa-question-edit" class="modal fade" tabindex="-1" data-backdrop="static"
+	data-keyboard="false">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true"></button>
+				<h4 class="modal-title">编辑小题</h4>
+			</div>
+			<div class="modal-body">
+				<form role="form">
+					<div class="form-body">
+						<div class="form-group form-md-line-input">
+							<label class="col-md-2 control-label" for="form_control_1">编号</label>
+							<div class="col-md-10">
+								<input type="text" class="form-control" id="form_control_1" placeholder="编号" ng-model="topic.num">
+							</div>
+						</div>
+						<div class="form-group form-md-line-input">
+							<label class="col-md-2 control-label" for="form_control_1">题目</label>
+							<div class="col-md-10">
+								<input type="text" class="form-control" id="form_control_1" placeholder="题目" ng-model="topic.subject">
+							</div>
+						</div>
+						<div class="form-group form-md-line-input">
+							<label class="col-md-2 control-label" for="form_control_1">排序</label>
+							<div class="col-md-10">
+								<input type="number" class="form-control" id="form_control_1" placeholder="排序" ng-model="topic.sort" min="1">
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" data-dismiss="modal" class="btn default">取消</button>
+				<button type="button" data-dismiss="modal" class="btn green" ng-click="saveTopic()">保存</button>
+			</div>
+		</div>
+	</div>
+</div>

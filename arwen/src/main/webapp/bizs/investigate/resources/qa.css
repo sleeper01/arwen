@@ -1,20 +1,60 @@
-.qa-title{
+.qa-title {
 	text-align: center;
 	font-size: 30px;
 	font-weight: bold;
+	cursor: pointer;
 }
 
-.qa-subtitle{
+.qa-subtitle {
 	text-align: center;
 	font-size: 25px;
 }
 
-.qa-base-info .title-hover .qa-base-info-edit-btn{
-	display : ''
-}
-
-.qa-base-info-edit-btn{
+.qa-base-info-edit-btn {
 	font-size: 20px;
-    display: none;
+	display: none;
 }
 
+.qa-topic-list {
+	cursor: pointer;
+}
+
+.qa-topic-title {
+	font-size: 20px;
+}
+
+.qa-desp {
+	font-size: 18px;
+	text-indent: 36px;
+	font-style: italic;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.qa-topic-title-num {
+	padding-right: 10px;
+}
+
+.qa-question-subject {
+	font-size: 18px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.qa-question-op {
+	font-size: 18px;
+	/* float: left; */
+	margin-right: 30px;
+}
+
+.qa-question-panel :hover{
+	background-color: #E9ECF3;
+}
+
+.qa-question-op-list {
+	margin-left: 20px;
+}
+
+.qa-question-op-list :last-child {
+	float: none;
+}

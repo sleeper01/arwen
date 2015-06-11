@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.dm.bizs.investigate.domain.model;
 
 import java.util.HashSet;
@@ -15,8 +12,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.util.CollectionUtils;
+
+import com.dm.common.domain.model.ISortable;
 import com.dm.common.domain.model.StatusEntity;
 import com.dm.common.utils.ParamUtils;
+import com.dm.common.utils.SerializeUtils;
 
 /**
  * @author Administrator
@@ -24,13 +25,16 @@ import com.dm.common.utils.ParamUtils;
  */
 @Entity
 @Table(name="tbl_invest_topic")
-public class Topic extends StatusEntity {
+public class Topic extends StatusEntity implements ISortable{
 
 	@Column
 	private String num;
 	
 	@Column
 	private String subject;
+	
+	@Column
+	private Integer sort;
 	
 	@ManyToOne(targetEntity = Questionaire.class,cascade=CascadeType.PERSIST)
 	private Questionaire questionaire;
@@ -66,12 +70,28 @@ public class Topic extends StatusEntity {
 		return questions;
 	}
 
+	/**
+	 * @return the sort
+	 */
+	public Integer getSort() {
+		return sort;
+	}
+
 	/* (non-Javadoc)
 	 * @see com.dm.common.domain.model.StatusEntity#toMap()
 	 */
 	@Override
 	public Map<Object, Object> toMap() {
-		return super.toMap();
+		Map<Object, Object> res = super.toMap();
+		res.put("num", this.num);
+		res.put("subject", this.subject);
+		res.put("sort", this.sort);
+		if(!CollectionUtils.isEmpty(this.questions)){
+			Set<QuestionCopy> sortedQuestion = new ParamUtils.SortedArrayBuilder<QuestionCopy>().build();
+			sortedQuestion.addAll(this.questions);
+			res.put("questions", SerializeUtils.convertEntitiesToMaps(sortedQuestion));
+		}
+		return res;
 	}
 
 	/* (non-Javadoc)
@@ -82,6 +102,7 @@ public class Topic extends StatusEntity {
 		super.caseCade(params);
 		this.setNum(ParamUtils.getString(params, "num", ""));
 		this.setSubject(ParamUtils.getString(params, "subject", ""));
+		this.setSort(ParamUtils.getInteger(params, "sort", 0));
 	}
 	
 	/**
@@ -90,8 +111,8 @@ public class Topic extends StatusEntity {
 	 */
 	public void addQuestion(Question question,Map<Object, Object> params){
 		QuestionCopy qc = new QuestionCopy();
-		qc.copy(question, params);
 		qc.setTopic(this);
+		qc.copy(question, params);
 		this.questions.add(qc);
 	}
 
@@ -121,5 +142,12 @@ public class Topic extends StatusEntity {
 	 */
 	protected void setQuestions(Set<QuestionCopy> questions) {
 		this.questions = questions;
+	}
+
+	/**
+	 * @param sort the sort to set
+	 */
+	protected void setSort(Integer sort) {
+		this.sort = sort;
 	}
 }

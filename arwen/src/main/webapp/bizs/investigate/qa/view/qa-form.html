@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" ng-show="!ctl.showQuesionPanel">
 	<div class="col-md-12 ">
 		<div class="portlet light">
 			<div class="portlet-title">
@@ -6,8 +6,8 @@
 					<i class="icon-settings font-red-sunglo"></i>
 					<span class="caption-subject bold uppercase">问卷编辑</span>
 				</div>
-				<div class="actions question_content" style="display:none">
-					<a href="#question_level_1" class="btn btn-default btn-sm" data-toggle="modal">
+				<div class="actions question_content" ng-show="!editBaseInfo">
+					<a href="javaScript:;" class="btn btn-default btn-sm" ng-click="addTopic()">
 					<i class="fa fa-plus"></i> 新增大题 </a>
 				</div>
 			</div>
@@ -82,11 +82,46 @@
 				</form>
 				<div class="qa-panel" ng-show="!editBaseInfo">
 					<div class="qa-base-info">
-						<div class="qa-title" ><span ng-bind="qa.title"></span><a href="javaScript:;" class="qa-base-info-edit-btn" mouse-hover add-class="title-hover">编辑</a></div>
+						<div class="qa-title" title="编辑基本信息" ng-click="edit()"><span ng-bind="qa.title"></span></div>
 						<div class="qa-subtitle"><span ng-bind="qa.subtitle"></span></div>
+						<div class="qa-desp" ng-bind="qa.desp"></div>
+					</div>
+					<div class="qa-topic-list">
+						<div class="qa-topic-panel" ng-repeat="topic in qa.topics">
+							<div class="qa-topic-title" context-menu option="contextOption" before-show="beforeShow(e)" tid="{{topic.id}}"><span class="qa-topic-title-num" ng-bind="topic.num"></span><span ng-bind="topic.subject"></span></div>
+							<div class="qa-question-list">
+								<div class="qa-question-panel" ng-repeat="question in topic.questions" context-menu option="contextOption" before-show="beforeShow(e)" tid="{{topic.id}}" qid="{{question.id}}" ng-switch on="question.type">
+									<div ng-switch-when="SINGLE_SELECTION" selection-panel question="question"></div>
+									<div ng-switch-when="MULTI_SELECTIION" selection-panel question="question"></div>
+									<div ng-switch-when="SUBJECTIVITY" subjectivity-panel question="question"></div>
+									<div ng-switch-when="SORT" selection-panel question="question"></div>
+									<div ng-switch-when="MARK" selection-panel question="question"></div>
+									<div ng-switch-when="GRADE" selection-panel question="question"></div>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+</div>
+<div ng-include src="'/arwen/bizs/investigate/qa/view/qa-topic-edit.html'"></div>
+
+<div id="context-menu2">
+	<ul class="dropdown-menu pull-left" role="menu">
+		<li>
+			<a href="javascript:;" ng-click="contextEdit()">
+			<i class="icon-present"></i> 编辑 </a>
+		</li>
+		<li>
+			<a href="javascript:;" ng-click="addQuestion()">
+			<i class="icon-flag"></i> 添加题目
+			</a>
+		</li>
+	</ul>
+</div>
+
+<div ng-show="ctl.showQuesionPanel" ng-controller="QuestionAddController">
+	<div ng-include src="'/arwen/bizs/investigate/qa/view/qa-question-add-panel.html'"></div>
 </div>

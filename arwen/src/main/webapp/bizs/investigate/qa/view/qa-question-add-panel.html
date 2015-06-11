@@ -1,0 +1,149 @@
+<div class="row" ng-show="step == 'question-search'">
+	<div class="portlet box green">
+		<div class="portlet-title">
+			<div class="caption">
+				<i class="fa fa-gift"></i>题库检索
+			</div>
+		</div>
+		<div class="portlet-body form">
+			<!-- BEGIN FORM-->
+			<form class="form-horizontal">
+				<div class="form-body">
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label col-md-3">关键字</label>
+								<div class="col-md-9">
+									<input type="text" class="form-control" placeholder="关键字" ng-model="params.subject">
+								</div>
+							</div>
+						</div>
+						<!--/span-->
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label col-md-3">分值</label>
+								<div class="col-md-9">
+									<input type="text" class="form-control" placeholder="分值" ng-model="params.score">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label col-md-3">类型</label>
+								<div class="col-md-9">
+									<select class="form-control" id="form_control_1" ng-model="params.type" placeholder="类型">
+										<option value="">请选择类型</option>
+										<option value="SINGLE_SELECTION">单选</option>
+										<option value="MULTI_SELECTIION">多选</option>
+										<option value="SUBJECTIVITY">主观</option>
+										<option value="SORT">排序</option>
+										<option value="MARK">评价</option>
+										<option value="GRADE">打分</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<!--/span-->
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label col-md-3">分值</label>
+								<div class="col-md-9">
+									<input type="text" class="form-control" placeholder="分值" ng-model="params.score">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label col-md-3">一级标签</label>
+								<div class="col-md-9">
+									<input type="text" class="form-control" placeholder="一级标签" ng-model="params.firLevelLabel">
+								</div>
+							</div>
+						</div>
+						<!--/span-->
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label col-md-3">二级标签</label>
+								<div class="col-md-9">
+									<input type="text" class="form-control" placeholder="二级标签" ng-model="params.secLevelLabel">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="form-actions">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="row">
+								<div class="col-md-offset-6 col-md-6">
+									<button type="button" class="btn default" ng-click="goTo('form')">取消</button>
+									<button type="button" class="btn blue-hoki" ng-click="clearSearch()">清空</button>
+									<button type="button" class="btn green" ng-click="search()">查询</button>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6"></div>
+					</div>
+				</div>
+			</form>
+			<!-- END FORM-->
+		</div>
+	</div>
+</div>
+
+<div class="row" ng-show="step == 'question-list'">
+	<div class="portlet box green">
+		<div class="portlet-title">
+			<div class="caption">
+				<i class="fa fa-gift"></i>题目选择
+			</div>
+			<div class="actions">
+				<a href="javascript:;" class="btn btn-default btn-sm" ng-click="goTo('form')">
+				 取消 </a>
+				<a href="javascript:;" class="btn btn-default btn-sm" ng-click="goTo('search')">
+				返回上一步 </a>
+			</div>
+		</div>
+		<div class="portlet-body">
+			<table class="table table-bordered table-hover">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>题干</th>
+						<th class="">一级标签</th>
+						<th class="">二级标签</th>
+						<th class="">分值</th>
+						<th class="">类型</th>
+						<th class="">更新时间</th>
+						<th class=""></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="item in list">
+						<td ng-bind="$index+1" width="5%" style="vertical-align: middle;"></td>
+						<td ng-bind="item.subject">
+						</td>
+						<td ng-bind="item.firLevelLabel" class="col-md-1" style="vertical-align: middle;">
+						</td>
+						<td ng-bind="item.secLevelLabel" class="col-md-1" style="vertical-align: middle;">
+						</td>
+						<td ng-bind="item.score" class="col-md-1" style="vertical-align: middle;">
+						</td>
+						<td ng-bind="item.type|questionType" class="col-md-1" style="vertical-align: middle;">
+						</td>
+						<td ng-bind="item.updateTime|date:'yyyy-MM-dd hh:mm:ss'" class="col-md-2" style="vertical-align: middle;">
+						</td>
+						<td style="vertical-align: middle;" class="col-md-1">
+							 <a href="javascript:;" class="btn default btn-xs blue-stripe" comfirmation-component ok-call="selectQuestion($index)">
+								选择 </a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.dm.bizs.investigate.domain.model;
 
 import java.util.Date;
@@ -17,9 +14,13 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.util.CollectionUtils;
+
 import com.dm.common.domain.model.Constant;
 import com.dm.common.domain.model.StatusEntity;
+import com.dm.common.utils.DateUtils;
 import com.dm.common.utils.ParamUtils;
+import com.dm.common.utils.SerializeUtils;
 
 /**
  * @author Administrator
@@ -100,7 +101,12 @@ public class Questionaire extends StatusEntity {
 		res.put("subtitle", this.subtitle);
 		res.put("desp", this.desp);
 		res.put("nameless", this.nameless);
-		res.put("expireDate", this.expireDate);
+		res.put("expireDate", DateUtils.getDateTimeStr(this.expireDate));
+		if(!CollectionUtils.isEmpty(this.topics)){
+			Set<Topic> sortedTopic = new ParamUtils.SortedArrayBuilder<Topic>().build();
+			sortedTopic.addAll(this.topics);
+			res.put("topics", SerializeUtils.convertEntitiesToMaps(sortedTopic));
+		}
 		return res;
 	}
 

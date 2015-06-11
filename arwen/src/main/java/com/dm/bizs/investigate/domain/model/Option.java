@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.dm.common.domain.model.Constant;
+import com.dm.common.domain.model.ISortable;
 import com.dm.common.domain.model.StatusEntity;
 import com.dm.common.utils.ParamUtils;
 
@@ -23,7 +24,7 @@ import com.dm.common.utils.ParamUtils;
  */
 @Entity
 @Table(name="tbl_invest_question_option")
-public class Option extends StatusEntity {
+public class Option extends StatusEntity implements ISortable{
 	
 	@Column
 	private String num;
@@ -37,6 +38,9 @@ public class Option extends StatusEntity {
 	
 	@ManyToOne(targetEntity = Question.class,cascade=CascadeType.PERSIST)
 	private Question question;
+	
+	@Column
+	private Integer sort;
 
 	/**
 	 * @return the num
@@ -64,6 +68,13 @@ public class Option extends StatusEntity {
 	 */
 	public Constant getRemarkable() {
 		return remarkable;
+	}
+
+	/**
+	 * @return the sort
+	 */
+	public Integer getSort() {
+		return sort;
 	}
 
 	/* (non-Javadoc)
@@ -115,5 +126,12 @@ public class Option extends StatusEntity {
 	 */
 	protected void setQuestion(Question question) {
 		this.question = question;
+	}
+
+	/**
+	 * @param sort the sort to set
+	 */
+	protected void setSort(Integer sort) {
+		this.sort = sort;
 	}
 }

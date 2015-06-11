@@ -1,7 +1,6 @@
-/**
- * 
- */
 package com.dm.bizs.investigate.domain.model;
+
+import java.util.Map;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,6 +12,7 @@ import javax.persistence.Table;
 
 import com.dm.common.domain.model.AbstractEntity;
 import com.dm.common.domain.model.Constant;
+import com.dm.common.domain.model.ISortable;
 
 /**
  * @author Administrator
@@ -20,7 +20,7 @@ import com.dm.common.domain.model.Constant;
  */
 @Entity
 @Table(name="tbl_invest_question_option_copy")
-public class OptionCopy extends AbstractEntity{
+public class OptionCopy extends AbstractEntity implements ISortable{
 
 	@Column
 	private String num;
@@ -37,6 +37,9 @@ public class OptionCopy extends AbstractEntity{
 	
 	@Column
 	private String optionId;
+	
+	@Column
+	private Integer sort;
 
 	/**
 	 * @return the num
@@ -73,11 +76,32 @@ public class OptionCopy extends AbstractEntity{
 		return optionId;
 	}
 	
+	/**
+	 * @return the sort
+	 */
+	public Integer getSort() {
+		return sort;
+	}
+
 	public void copy(Option option){
 		this.setNum(option.getNum());
 		this.setContent(option.getContent());
 		this.setRemarkable(option.getRemarkable());
 		this.setOptionId(option.getId());
+		this.setSort(option.getSort());
+	}
+
+	/* (non-Javadoc)
+	 * @see com.dm.common.domain.model.AbstractEntity#toMap()
+	 */
+	@Override
+	public Map<Object, Object> toMap() {
+		Map<Object, Object> res = super.toMap();
+		res.put("num", this.num);
+		res.put("content", this.content);
+		res.put("remarkable", this.remarkable);
+		res.put("sort", this.sort);
+		return res;
 	}
 
 	/**
@@ -113,5 +137,12 @@ public class OptionCopy extends AbstractEntity{
 	 */
 	protected void setOptionId(String optionId) {
 		this.optionId = optionId;
+	}
+
+	/**
+	 * @param sort the sort to set
+	 */
+	protected void setSort(Integer sort) {
+		this.sort = sort;
 	}
 }

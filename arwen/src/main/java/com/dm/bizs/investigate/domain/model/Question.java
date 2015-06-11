@@ -169,6 +169,7 @@ public class Question extends StatusEntity {
 	public void addOption(Option option){
 		if(option != null){
 			option.setQuestion(this);
+			option.setSort(this.options.size()+1);
 			this.options.add(option);
 		}
 	}

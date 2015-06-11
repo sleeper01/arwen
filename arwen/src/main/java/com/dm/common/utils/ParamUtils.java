@@ -4,15 +4,18 @@
 package com.dm.common.utils;
 
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.springframework.util.StringUtils;
 
 import com.dm.common.domain.model.GenericObjectCallBack;
+import com.dm.common.domain.model.ISortable;
 
 /**
  * @author Administrator
@@ -189,5 +192,24 @@ public class ParamUtils {
 		public Map<Object, Object> build() {
 			return this.params;
 		}
+	}
+	
+	
+	public static class SortedArrayBuilder<T extends ISortable>{
+		
+		private Set<T> entities = new TreeSet<>(new Comparator<T>(){
+			@Override
+			public int compare(T o1, T o2) {
+				if(o1.getSort().equals(o2.getSort())){
+					return o1.getId().compareTo(o2.getId());
+				}
+				return o1.getSort().compareTo(o2.getSort());
+			}
+		});
+		
+		public Set<T> build(){
+			return entities;
+		}
+		
 	}
 }

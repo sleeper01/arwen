@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dm.bizs.investigate.domain.model.Questionaire;
-import com.dm.bizs.investigate.service.QuestionaireService;
+import com.dm.bizs.investigate.domain.model.Topic;
+import com.dm.bizs.investigate.service.TopicService;
 import com.dm.common.constants.ResultConstants;
 import com.dm.common.controller.AbstractController;
 import com.dm.common.exception.MyRuntimeException;
@@ -26,31 +27,11 @@ import com.dm.common.utils.ParamUtils;
  *
  */
 @Controller
-@RequestMapping("/questionaire")
-public class QuestionaireController extends AbstractController<Questionaire> {
+@RequestMapping("/topic")
+public class TopicController extends AbstractController<Topic> {
 
 	@Autowired
-	private QuestionaireService service;
-	
-	@RequestMapping("/getPageList")
-	@ResponseBody
-	public Object getPageList(@RequestBody Map<Object,Object>params,@RequestParam("page")Integer page,@RequestParam("pageSize")Integer pageSize, HttpServletRequest request,HttpServletResponse response){
-		this.getSessionAccount(params, request);
-		return service.getPageList(params, page, pageSize);
-	}
-	
-	@RequestMapping("/persist")
-	public @ResponseBody Object persist(@RequestBody Map<Object,Object> params,HttpServletRequest request)throws MyRuntimeException{
-		this.getSessionAccount(params, request);
-		Map<Object,Object> res = new HashMap<Object,Object>();
-		if(!"".equals(ParamUtils.getString(params, "id", ""))){
-			res.put("data", service.update1(params));
-		}else{
-			res.put("data", service.create1(params));
-		}
-		res.put(ResultConstants.SUCCESS, true);
-		return res;
-	}
+	private TopicService service;
 	
 	/**
 	 * @Title: addTopic
@@ -59,11 +40,11 @@ public class QuestionaireController extends AbstractController<Questionaire> {
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping("/addTopic")
+	@RequestMapping("/addQuestion")
 	@ResponseBody
-	public Object addTopic(@RequestBody Map<Object,Object> params,HttpServletRequest request){
+	public Object addQuestion(@RequestBody Map<Object,Object> params,HttpServletRequest request){
 		this.getSessionAccount(params, request);
-		service.addTopic(params);
+		service.addQuestion(params);
 		Map<Object,Object> res = new HashMap<Object,Object>();
 		res.put(ResultConstants.SUCCESS, true);
 		return res;
@@ -73,7 +54,7 @@ public class QuestionaireController extends AbstractController<Questionaire> {
 	 * @see com.dm.common.controller.AbstractController#getService()
 	 */
 	@Override
-	protected AbstractService<Questionaire> getService() {
+	protected AbstractService<Topic> getService() {
 		return service;
 	}
 }

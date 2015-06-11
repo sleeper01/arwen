@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.dm.bizs.investigate.service;
 
 import java.util.Collection;
@@ -17,6 +14,7 @@ import com.dm.common.dao.AbstractDao;
 import com.dm.common.exception.MyRuntimeException;
 import com.dm.common.service.AbstractService;
 import com.dm.common.utils.ParamUtils;
+import com.dm.common.utils.SerializeUtils;
 
 /**
  * @author Administrator
@@ -50,6 +48,12 @@ public class QuestionaireService extends AbstractService<Questionaire> {
 		super.update(qa);
 		return qa.toMap();
 	}
+	
+	public void addTopic(Map<Object,Object> params){
+		Questionaire qa = super.get(ParamUtils.getString(params, "qaId", ""));
+		qa.addTopic(params);
+		super.update(qa);
+	}
 
 	/* (non-Javadoc)
 	 * @see com.dm.common.service.AbstractService#getList(java.util.Map)
@@ -66,7 +70,7 @@ public class QuestionaireService extends AbstractService<Questionaire> {
 	@Override
 	public Object getPageList(Map<Object, Object> params, Integer page,
 			Integer pageSize) {
-		return dao.getPageList(params, page, pageSize);
+		return SerializeUtils.convertEntitiesToMaps(dao.getPageList(params, page, pageSize));
 	}
 
 	/* (non-Javadoc)

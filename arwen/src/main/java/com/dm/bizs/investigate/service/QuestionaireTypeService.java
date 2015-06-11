@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package com.dm.bizs.investigate.service;
 
 import java.util.Collection;
@@ -8,55 +11,32 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.dm.bizs.investigate.dao.QuestionDao;
-import com.dm.bizs.investigate.dao.TopicDao;
-import com.dm.bizs.investigate.domain.model.Question;
-import com.dm.bizs.investigate.domain.model.Topic;
+import com.dm.bizs.investigate.dao.QuestionaireTypeDao;
+import com.dm.bizs.investigate.domain.model.QuestionaireType;
 import com.dm.common.dao.AbstractDao;
 import com.dm.common.exception.MyRuntimeException;
 import com.dm.common.service.AbstractService;
-import com.dm.common.utils.ParamUtils;
+import com.dm.common.utils.SerializeUtils;
 
 /**
  * @author Administrator
  *
  */
-@Service("topicService")
+@Service("questionaireTypeService")
 @Transactional(rollbackFor=Exception.class,propagation=Propagation.REQUIRED)
-public class TopicService extends AbstractService<Topic> {
+public class QuestionaireTypeService extends AbstractService<QuestionaireType> {
 
 	@Autowired
-	private QuestionDao questionDao;
-	
-	@Autowired
-	private TopicDao dao;
+	private QuestionaireTypeDao dao;
 	
 	/* (non-Javadoc)
 	 * @see com.dm.common.service.AbstractService#create(java.util.Map)
 	 */
 	@Override
 	public void create(Map<Object, Object> params) throws MyRuntimeException {
-		
-	}
-
-	/* (non-Javadoc)
-	 * @see com.dm.common.service.AbstractService#update(java.util.Map)
-	 */
-	@Override
-	public void update(Map<Object, Object> params) throws MyRuntimeException {
-		super.update(params);
-	}
-	
-	/**
-	 * @Title: addQuestion
-	 * @Description: 
-	 * @param params
-	 */
-	public void addQuestion(Map<Object, Object> params){
-		Topic topic = super.get(ParamUtils.getString(params, "topicId", ""));
-		Question question = questionDao.get(ParamUtils.getString(params, "questionId", ""));
-		topic.addQuestion(question, params);
-		super.update(topic);
+		QuestionaireType type = new QuestionaireType();
+		type.caseCade(params);
+		super.create(type);
 	}
 
 	/* (non-Javadoc)
@@ -64,15 +44,14 @@ public class TopicService extends AbstractService<Topic> {
 	 */
 	@Override
 	public Collection<Map<Object, Object>> getList(Map<Object, Object> params) {
-		// TODO Auto-generated method stub
-		return null;
+		return SerializeUtils.convertEntitiesToMaps(dao.findAll());
 	}
 
 	/* (non-Javadoc)
 	 * @see com.dm.common.service.AbstractService#getDao()
 	 */
 	@Override
-	protected AbstractDao<Topic> getDao() {
+	protected AbstractDao<QuestionaireType> getDao() {
 		return dao;
 	}
 }

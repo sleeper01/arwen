@@ -1,0 +1,11 @@
+<div>
+	<div class="qa-question-subject">
+		<span class="qa-question-num" ng-bind="question.num"></span> <span
+			ng-bind="question.subject"></span>
+	</div>
+	<div class="qa-question-op-list">
+		<div class="qa-question-op" ng-repeat="op in question.options">
+			<span ng-bind="op.num"></span> <span ng-bind="op.content"></span>
+		</div>
+	</div>
+</div>
