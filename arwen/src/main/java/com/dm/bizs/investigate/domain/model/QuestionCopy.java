@@ -36,7 +36,7 @@ public class QuestionCopy extends StatusEntity implements ISortable{
 	@ManyToOne(targetEntity = Topic.class,cascade=CascadeType.PERSIST)
 	private Topic topic;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "questionCopy")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "questionCopy",orphanRemoval=true)
 	private Set<OptionCopy> options = new HashSet<>();
 	
 	@Column

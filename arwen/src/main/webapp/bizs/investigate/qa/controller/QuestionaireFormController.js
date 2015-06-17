@@ -13,7 +13,6 @@ define(['../service/QuestionaireService.js',
 		}]);
 		service.getTypeList().then(function(data){
 			$scope.typeList = data;
-			console.log(data);
 		});
 		$scope.qa = {
 			title : '',
@@ -108,6 +107,9 @@ define(['../service/QuestionaireService.js',
 		$scope.contextOption = {
 			target: '#context-menu2'
 		};
+		$scope.contextOption1 = {
+				target: '#context-menu'
+		};
 		
 		$scope.beforeShow = function(e){
 			$scope.curClick = {
@@ -125,6 +127,15 @@ define(['../service/QuestionaireService.js',
 		
 		$scope.addQuestion = function(){
 			$scope.ctl.showQuesionPanel = true;
+		};
+		
+		$scope.removeQuestion = function(){
+			service.deleteQuestion($scope.curClick.qid).then(function(data){
+				if(data && data.success){
+					bubbleMessage.show({msg:'操作成功!'});
+					$scope.load();
+				}
+			});
 		};
 	}]);
 });

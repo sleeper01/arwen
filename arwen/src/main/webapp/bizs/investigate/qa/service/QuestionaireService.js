@@ -25,6 +25,9 @@ define(['/arwen/bizs/common/service/http.js'],function(){
 			addQuestion : function(data){
 				return httpService.post('/arwen/topic/addQuestion.qh',data,true);
 			},
+			deleteQuestion : function(id){
+				return httpService.get('/arwen/questioncopy/delete.qh?id='+id);
+			},
 			getTypeList : function(){
 				return httpService.post('/arwen/questionaireType/getList.qh',{status:'ENABLE'});
 			}

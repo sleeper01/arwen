@@ -88,7 +88,11 @@ public class Topic extends StatusEntity implements ISortable{
 		res.put("sort", this.sort);
 		if(!CollectionUtils.isEmpty(this.questions)){
 			Set<QuestionCopy> sortedQuestion = new ParamUtils.SortedArrayBuilder<QuestionCopy>().build();
-			sortedQuestion.addAll(this.questions);
+			for(QuestionCopy copy : this.questions){
+				if(Status.ENABLE.equals(copy.getStatus())){
+					sortedQuestion.add(copy);
+				}
+			}
 			res.put("questions", SerializeUtils.convertEntitiesToMaps(sortedQuestion));
 		}
 		return res;
